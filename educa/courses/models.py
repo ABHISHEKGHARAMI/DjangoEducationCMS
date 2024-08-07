@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # model for the  subject
 class Subject(models.Model):
     title = models.CharField(max_length=200)
-    slugfield = models.SlugField(max_length=200,unique=True)
+    slug = models.SlugField(max_length=200,unique=True)
     
     # meta class for the subjects model for the ordering
     class Meta:
