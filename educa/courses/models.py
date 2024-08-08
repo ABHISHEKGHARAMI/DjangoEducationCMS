@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from .fields import OrderField
 # Create your models here.
 
 
@@ -47,6 +48,7 @@ class Module(models.Model):
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField()
+    order = OrderField(blank=True,for_fields=['courses'])
     
     class Meta:
         ordering = ['title']
