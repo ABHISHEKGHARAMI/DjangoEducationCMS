@@ -76,6 +76,10 @@ class Content(models.Model):
                                      })
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('content_type','object_id')
+    order = OrderField(blank=True,on_fields=['module'])
+    
+    class Meta:
+        ordering = ['order']
     
     
 class ItemBase(models.Model):
