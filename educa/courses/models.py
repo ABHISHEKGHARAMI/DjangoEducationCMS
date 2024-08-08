@@ -51,12 +51,12 @@ class Module(models.Model):
     order = OrderField(blank=True,for_fields=['courses'])
     
     class Meta:
-        ordering = ['title']
+        ordering = ['order']
         
     
     # str method
     def __str__(self):
-        return self.title
+        return f'{self.order}.{self.title}'
     
     
 # adding the polymorphoric  content
