@@ -12,7 +12,7 @@
     <p>Please use the following form for login .</p>
     {% endif %}
     <div class="login-form">
-     <form action="" method="post">
+     <form action="{% url 'login' %}" method="post">
      {{ form.as_p}}
      {% csrf_token %}
      <input type="hidden" name="next" value="{{ next }}">
