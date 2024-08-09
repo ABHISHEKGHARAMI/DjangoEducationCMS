@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView,DeleteView,UpdateView
+from django.urls import reverse_lazy
 from .models import Course
 # Create your views here.
 
@@ -13,3 +15,25 @@ class CourseListView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(owner=self.request.user)
+
+# using the different mixing for the crud operation
+class OwnerMixin:
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(owner=self.request.user)
+    
+    
+class OwnerEditMixin:
+    def get_queryset(self,form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+    
+    
+# purpose of using the different type of the mixin
+# 1: Multiple feature of the data
+# 2: Use the particular feature of the data for the different class
+    
+class OwnerCourseMixin(OwnerMixin):
+    model = Course
+    fields = ['subject','title','slug','overview']
+    success_url = reverse_lazy('manage_course_list')
