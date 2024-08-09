@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
+from django.contrib.auth.mixins import PermissionRequiredMixin,LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Course
 # Create your views here.
@@ -33,7 +34,7 @@ class OwnerEditMixin:
 # 1: Multiple feature of the data
 # 2: Use the particular feature of the data for the different class
     
-class OwnerCourseMixin(OwnerMixin):
+class OwnerCourseMixin(OwnerMixin,LoginRequiredMixin,PermissionRequiredMixin):
     model = Course
     fields = ['subject','title','slug','overview']
     success_url = reverse_lazy('manage_course_list')
