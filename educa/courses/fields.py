@@ -12,7 +12,7 @@ class OrderField(models.PositiveIntegerField):
     # custom method for the if any value is not given then we will check then before save
     # give the value after calculation and save it 
     def pre_save(self,model_instance,add):
-        if getattr(model_instance,setattr) is None:
+        if getattr(model_instance,self.attname) is None:
             # the value given is 0 then have to calculate it
             try:
                 qs = self.model.objects.all()
